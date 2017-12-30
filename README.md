@@ -2,6 +2,9 @@
 Presentational and Container Components
 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 
+Other Kirupa Lessons
+https://www.kirupa.com/react/index.htm
+
 
 For more examples of react-router
 https://github.com/ReactTraining/react-router
