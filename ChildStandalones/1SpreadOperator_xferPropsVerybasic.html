@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>From Data to UI</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+  <script type="text/babel">
+var items = ["1", "2", "3"];
+ 
+function printStuff(a, b, c) {
+  console.log("Printing: " + a + " " + b + " " + c);
+}
+
+
+/* These lines do the same thing*/
+printStuff(items[0], items[1], items[2]);
+printStuff(...items);
+
+
+
+class Display extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>{this.props.color}</p>
+        <p>{this.props.num}</p>
+        <p>{this.props.size}</p>
+        <p>{this.props.shoes}</p>
+        <p>{this.props.newCustomProp}</p>
+      </div>
+    );
+  }
+}
+ 
+class Label extends React.Component {
+  render() {
+    return (
+       <Display {...this.props} />
+      //  Three Lines below are replaced by the {...this.props above}
+     
+      // <Display color={this.props.color}
+      //          num={this.props.num}
+      //          size={this.props.size}/>
+    );
+  }
+}
+ 
+class Shirt extends React.Component {
+  render() {
+    return (
+      <div>
+        <Label {...this.props} />
+
+        { /*  Three Lines below are replaced by the {...this.props above}
+             <Label color={this.props.color}
+              num={this.props.num}
+              size={this.props.size}/> */}
+      </div>
+    );
+  }
+}
+ 
+ReactDOM.render(
+  <div>
+    <Shirt color="steelblue" num="3.14" size="medium" shoes="Actually not shoes" newCustomProp="Awyis" />
+  </div>,
+  document.querySelector("#container")
+);
+
+
+/*  Refer to contructor.md
+
+s this the best way to transfer properties?
+Using the spread operator to transfer properties is convenient, and it is a marked improvement over explicitly defining each property at each component like we were doing originally. The thing is, even the spread operator approach isn't a perfect solution. If all you want to do is transfer a property to a particular component, having each intermediate component play a role in passing it on is unnecessary. Worse, it has the potential to be a performance bottleneck. Any change to a property that you are passing along will trigger a component update on each component along the property's path. That's not a good thing! We will look at better ways later on that solve this "transferring properties" problem much better without any side effects.
+
+
+
+```
+ explain what are constructor(props, context) and super(props, context) and explain their purpose
+
+ ```
+
+ ```
+
+ They are just part of the ES6 classes implementation: https://www.kirupa.com/javascript/classy_way_to_create_objects.htm
+ 
+The purpose of the constructor is to automatically execute any code as part of creating the object.
+
+Every React component gets a few arguments passed in during creation. 
+
+The props argument contains the things you receive via this.props.
+
+The context argument is something you’ll rarely need to use…except when using Redux and related libraries that help manage state.
+```
+*/
+</script>

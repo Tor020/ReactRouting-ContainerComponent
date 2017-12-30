@@ -1,5 +1,5 @@
 import React, { Component } from "react";
- import "./IPAddress.css";
+ import "./styles/IPAddress.css";
 
 
 class IPAddress extends Component {
@@ -7,7 +7,7 @@ class IPAddress extends Component {
     return (
       <div>
         <h1>{this.props.ip}</h1>
-        <p>( This is your IP address...probably :P )</p>
+        <p>Your IP</p>
       </div>
     );
   }

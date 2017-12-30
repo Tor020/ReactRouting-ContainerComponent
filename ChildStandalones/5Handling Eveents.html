@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Events</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+
+<body>
+
+<a href="https://www.kirupa.com/react/events_in_react.htm"> Probably gonna need to read this page a lot</a>
+<br> <br>
+For the info you're gonna wanna read
+<br> <br>
+After you're on that page do :
+<br> <br>
+
+ctrl + f
+
+<br> More Eventing Shenanigans
+<br> <br>
+
+
+  <div id="container"></div>
+  <script type="text/babel">
+
+
+ class Counter extends React.Component {
+  render() {
+    let textStyle = {
+      fontSize: 72,
+      fontFamily: "sans-serif",
+      color: "#333",
+      fontWeight: "bold"
+    };
+ 
+    return (
+      <div style={textStyle}>
+        {this.props.display}
+      </div>
+    );
+  }
+}
+ 
+class CounterParent extends React.Component {
+  constructor(props) {
+    super(props);
+ 
+    this.state = {
+      count: 0
+    };
+
+    this.increase = this.increase.bind(this);
+  }
+ 
+  increase(e) {
+
+  let currentCount = this.state.count;
+ 
+  if (e.shiftKey) {
+    currentCount += 10;
+  } else {
+    currentCount += 1;
+  }
+
+    this.setState({
+       count: currentCount
+    });
+  }
+
+  render() {
+    let backgroundStyle = {
+      padding: 50,
+      backgroundColor: "#FFC53A",
+      width: 250,
+      height: 100,
+      borderRadius: 10,
+      textAlign: "center"
+    };
+ 
+    let buttonStyle = {
+      fontSize: "1em",
+      width: 30,
+      height: 30,
+      fontFamily: "sans-serif",
+      color: "#333",
+      fontWeight: "bold",
+      lineHeight: "3px"
+    };
+     
+    return (
+      <div style={backgroundStyle}>
+        <Counter display={this.state.count}/>
+        <button onClick={this.increase} style={buttonStyle}>+</button>
+      </div>
+    ); 
+  }
+}
+ 
+ReactDOM.render(
+  <div>
+    <CounterParent />
+  </div>,
+  document.querySelector("#container")
+);
+
+
+
+
+
+
+
+
+/*
+Each SyntheticEvent contains the following properties
+
+boolean bubbles
+boolean cancelable
+DOMEventTarget currentTarget
+boolean defaultPrevented
+number eventPhase
+boolean isTrusted
+DOMEvent nativeEvent
+void preventDefault()
+boolean isDefaultPrevented()
+void stopPropagation()
+boolean isPropagationStopped()
+DOMEventTarget target
+number timeStamp
+string type
+
+MouseEvent will have access to mouse-specific properties such as the following:
+
+boolean altKey
+number button
+number buttons
+number clientX
+number clientY
+boolean ctrlKey
+boolean getModifierState(key)
+boolean metaKey
+number pageX
+number pageY
+DOMEventTarget relatedTarget
+number screenX
+number screenY
+boolean shiftKey
+
+Similarly, a SyntheticEvent that wraps a KeyboardEvent will have access to these additional keyboard-related properties
+
+boolean altKey
+number charCode
+boolean ctrlKey
+boolean getModifierState(key)
+string key
+number keyCode
+string locale
+number location
+boolean metaKey
+boolean repeat
+boolean shiftKey
+number which
+
+In the end, all of this means that you still get the same functionality in the SyntheticEvent world that you had in the vanilla DOM world.
+
+Don't refer to traditional DOM event documentation when using Synthetic events and their properties.
+
+https://reactjs.org/docs/events.html use this instead for event info
+*/
+
+
+ 
+  </script>
+</body>
+
+</html>
